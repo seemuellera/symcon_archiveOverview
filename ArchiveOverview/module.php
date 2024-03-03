@@ -137,7 +137,7 @@ class ArchiveOverview extends IPSModule {
 		// Do nothing if status is off
 		if (! GetValue($this->GetIDForIdent("Status"))) {
 			
-			$this->RefreshInformationStandard();
+			return;
 		}
 		
 		$this->LogMessage("Refresh in Progress", KL_DEBUG);
@@ -145,6 +145,10 @@ class ArchiveOverview extends IPSModule {
 		if (AC_GetAggregationType($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable')) == 1) {
 
 			$this->RefreshInformationCounter();
+		}
+		else {
+
+			$this->RefreshInformationStandard();
 		}
 	}
 
