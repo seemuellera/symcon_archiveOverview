@@ -157,6 +157,16 @@ class ArchiveOverview extends IPSModule {
 		SetValue($this->GetIDForIdent('CountYearly'), $this->getAggregatedData("first day of January", 4, "Avg"));
 	}
 
+	protected function RefreshInformationStandard() {
+
+		$dailyData = $this->getAggregatedDataSet("today 00:00", 1);
+		SetValue($this->GetIDForIdent('DailyAvg'), $dailyData['Avg']);
+		SetValue($this->GetIDForIdent('DailyMin'), $dailyData['Min']);
+		SetValue($this->GetIDForIdent('DailyMinTime'), $dailyData['MinTime']);
+		SetValue($this->GetIDForIdent('DailyMax'), $dailyData['Max']);
+		SetValue($this->GetIDForIdent('DailyMaxTime'), $dailyData['MaxTime']);
+	}
+
 	protected function getAggregatedData($prompt, $aggregationLevel, $function) {
 
 		$tsEnd = time();
@@ -168,6 +178,24 @@ class ArchiveOverview extends IPSModule {
 		if (count($data) > 0) {
 
 			return $data[0][$function];
+		}
+		else {
+
+			return 0;
+		}
+	}
+
+	protected function getAggregatedDataSet($prompt, $aggregationLevel) {
+
+		$tsEnd = time();
+		$tsStart = strtotime($prompt);
+		$this->LogMessage("Prompt: $prompt / Timestamp: $tsStart", KL_DEBUG);
+
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), $aggregationLevel, $tsStart, $tsEnd, 0);
+
+		if (count($data) > 0) {
+
+			return $data[0];
 		}
 		else {
 
