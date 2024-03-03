@@ -65,6 +65,29 @@ class ArchiveOverview extends IPSModule {
 			else {
 
 				// Create variables for regular aggregation types
+				$this->RegisterVariableFloat("DailyAvg","Today - Average","");
+				$this->RegisterVariableFloat("DailyMin","Today - Minimum","");
+				$this->RegisterVariableInteger("DailyMinTime","Today - Minimum - Timestamp","~UnixTimestamp");
+				$this->RegisterVariableFloat("DailyMax","Today - Maximum","");
+				$this->RegisterVariableInteger("DailyMaxTime","Today - Maximum - Timestamp","~UnixTimestamp");
+
+				$this->RegisterVariableFloat("WeeklyAvg","This Week - Average","");
+				$this->RegisterVariableFloat("WeeklyMin","This Week - Minimum","");
+				$this->RegisterVariableInteger("WeeklyMinTime","This Week - Minimum - Timestamp","~UnixTimestamp");
+				$this->RegisterVariableFloat("WeeklyMax","This Week - Maximum","");
+				$this->RegisterVariableInteger("WeeklyMaxTime","This Week - Maximum - Timestamp","~UnixTimestamp");
+
+				$this->RegisterVariableFloat("MonthlyAvg","This Month - Average","");
+				$this->RegisterVariableFloat("MonthlyMin","This Month - Minimum","");
+				$this->RegisterVariableInteger("MonthlyMinTime","This Month - Minimum - Timestamp","~UnixTimestamp");
+				$this->RegisterVariableFloat("MonthlyMax","This Month - Maximum","");
+				$this->RegisterVariableInteger("MonthlyMaxTime","This Month - Maximum - Timestamp","~UnixTimestamp");
+
+				$this->RegisterVariableFloat("YearlyAvg","This Year - Average","");
+				$this->RegisterVariableFloat("YearlyMin","This Year - Minimum","");
+				$this->RegisterVariableInteger("YearlyMinTime","This Year - Minimum - Timestamp","~UnixTimestamp");
+				$this->RegisterVariableFloat("YearlyMax","This Year - Maximum","");
+				$this->RegisterVariableInteger("YearlyMaxTime","This Year - Maximum - Timestamp","~UnixTimestamp");
 			}
 		}
 		
