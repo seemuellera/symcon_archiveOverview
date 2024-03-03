@@ -180,11 +180,11 @@ class ArchiveOverview extends IPSModule {
 
 		if ($dataSet) {
 			
-			SetValue($this->GetIDForIdent($baseIdent . 'Avg'), $dailyData['Avg']);
-			SetValue($this->GetIDForIdent($baseIdent . 'Min'), $dailyData['Min']);
-			SetValue($this->GetIDForIdent($baseIdent . 'MinTime'), $dailyData['MinTime']);
-			SetValue($this->GetIDForIdent($baseIdent . 'Max'), $dailyData['Max']);
-			SetValue($this->GetIDForIdent($baseIdent . 'MaxTime'), $dailyData['MaxTime']);
+			SetValue($this->GetIDForIdent($baseIdent . 'Avg'), $dataSet['Avg']);
+			SetValue($this->GetIDForIdent($baseIdent . 'Min'), $dataSet['Min']);
+			SetValue($this->GetIDForIdent($baseIdent . 'MinTime'), $dataSet['MinTime']);
+			SetValue($this->GetIDForIdent($baseIdent . 'Max'), $dataSet['Max']);
+			SetValue($this->GetIDForIdent($baseIdent . 'MaxTime'), $dataSet['MaxTime']);
 		}
 		else {
 			SetValue($this->GetIDForIdent($baseIdent . 'Avg'), null);
