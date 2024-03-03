@@ -1,0 +1,14 @@
+{
+  "id": "{47D76629-DD48-4F46-A861-A8DBA5A29CCF}",
+  "name": "ArchiveOverview",
+  "type": 3,
+  "vendor": "Andreas Seemueller",
+  "aliases": 
+  [
+	  "ArchiveOverview"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "ARCHIVEOV"
+}
