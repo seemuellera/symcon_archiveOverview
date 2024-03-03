@@ -160,11 +160,22 @@ class ArchiveOverview extends IPSModule {
 	protected function RefreshInformationStandard() {
 
 		$dailyData = $this->getAggregatedDataSet("today 00:00", 1);
-		SetValue($this->GetIDForIdent('DailyAvg'), $dailyData['Avg']);
-		SetValue($this->GetIDForIdent('DailyMin'), $dailyData['Min']);
-		SetValue($this->GetIDForIdent('DailyMinTime'), $dailyData['MinTime']);
-		SetValue($this->GetIDForIdent('DailyMax'), $dailyData['Max']);
-		SetValue($this->GetIDForIdent('DailyMaxTime'), $dailyData['MaxTime']);
+
+		if ($dailyData) {
+			
+			SetValue($this->GetIDForIdent('DailyAvg'), $dailyData['Avg']);
+			SetValue($this->GetIDForIdent('DailyMin'), $dailyData['Min']);
+			SetValue($this->GetIDForIdent('DailyMinTime'), $dailyData['MinTime']);
+			SetValue($this->GetIDForIdent('DailyMax'), $dailyData['Max']);
+			SetValue($this->GetIDForIdent('DailyMaxTime'), $dailyData['MaxTime']);
+		}
+		else {
+			SetValue($this->GetIDForIdent('DailyAvg'), null);
+			SetValue($this->GetIDForIdent('DailyMin'), null);
+			SetValue($this->GetIDForIdent('DailyMinTime'), null);
+			SetValue($this->GetIDForIdent('DailyMax'), null);
+			SetValue($this->GetIDForIdent('DailyMaxTime'), null);
+		}
 	}
 
 	protected function getAggregatedData($prompt, $aggregationLevel, $function) {
@@ -199,7 +210,7 @@ class ArchiveOverview extends IPSModule {
 		}
 		else {
 
-			return 0;
+			return false;
 		}
 	}
 
