@@ -48,6 +48,24 @@ class ArchiveOverview extends IPSModule {
 		
 		$this->RegisterReference($this->ReadPropertyInteger("ArchiveId"));
 		$this->RegisterReference($this->ReadPropertyInteger("SourceVariable"));
+
+		// Create variables only after basic configuration is done
+		if ( ($this->ReadPropertyInteger('SourceVariable') != 0) && ($this->ReadPropertyInteger('ArchiveId') != 0) ) {
+
+			// Set Variables for counter type variables
+			if (AC_GetAggregationType($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable')) == 1) {
+
+				// Create variables for counter aggregation types
+				$this->RegisterVariableFloat("CountDaily","Count Today","");
+				$this->RegisterVariableFloat("CountWeekly","Count This Week","");
+				$this->RegisterVariableFloat("CountMonthly","Count This Month","");
+				$this->RegisterVariableFloat("CountYearly","Count This Year","");
+			}
+			else {
+
+				// Create variables for regular aggregation types
+			}
+		}
 		
 		// Diese Zeile nicht löschen
 		parent::ApplyChanges();
