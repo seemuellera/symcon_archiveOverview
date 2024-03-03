@@ -164,21 +164,34 @@ class ArchiveOverview extends IPSModule {
 	protected function RefreshInformationStandard() {
 
 		$dailyData = $this->getAggregatedDataSet("today 00:00", 1);
+		$this->updateDataBulk('Daily', $dailyData);
 
-		if ($dailyData) {
+		$weeklyData = $this->getAggregatedDataSet("Monday this week 00:00", 2);
+		$this->updateDataBulk('Weekly', $weeklyData);
+
+		$monthlyData = $this->getAggregatedDataSet("first day of this month 00:00", 3);
+		$this->updateDataBulk('Monthly', $monthlyData);
+
+		$yearlyData = $this->getAggregatedDataSet("first day of January", 4);
+		$this->updateDataBulk('Yearly', $yearlyData);
+	}
+
+	protected function updateDataBulk($baseIdent, $dataSet) {
+
+		if ($dataSet) {
 			
-			SetValue($this->GetIDForIdent('DailyAvg'), $dailyData['Avg']);
-			SetValue($this->GetIDForIdent('DailyMin'), $dailyData['Min']);
-			SetValue($this->GetIDForIdent('DailyMinTime'), $dailyData['MinTime']);
-			SetValue($this->GetIDForIdent('DailyMax'), $dailyData['Max']);
-			SetValue($this->GetIDForIdent('DailyMaxTime'), $dailyData['MaxTime']);
+			SetValue($this->GetIDForIdent($baseIdent . 'Avg'), $dailyData['Avg']);
+			SetValue($this->GetIDForIdent($baseIdent . 'Min'), $dailyData['Min']);
+			SetValue($this->GetIDForIdent($baseIdent . 'MinTime'), $dailyData['MinTime']);
+			SetValue($this->GetIDForIdent($baseIdent . 'Max'), $dailyData['Max']);
+			SetValue($this->GetIDForIdent($baseIdent . 'MaxTime'), $dailyData['MaxTime']);
 		}
 		else {
-			SetValue($this->GetIDForIdent('DailyAvg'), null);
-			SetValue($this->GetIDForIdent('DailyMin'), null);
-			SetValue($this->GetIDForIdent('DailyMinTime'), null);
-			SetValue($this->GetIDForIdent('DailyMax'), null);
-			SetValue($this->GetIDForIdent('DailyMaxTime'), null);
+			SetValue($this->GetIDForIdent($baseIdent . 'Avg'), null);
+			SetValue($this->GetIDForIdent($baseIdent . 'Min'), null);
+			SetValue($this->GetIDForIdent($baseIdent . 'MinTime'), null);
+			SetValue($this->GetIDForIdent($baseIdent . 'Max'), null);
+			SetValue($this->GetIDForIdent($baseIdent . 'MaxTime'), null);
 		}
 	}
 
