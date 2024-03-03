@@ -127,11 +127,11 @@ class ArchiveOverview extends IPSModule {
 
 	protected function RefreshInformationCounter() {
 
-		SetValue($this->GetIDForIdent('CountHourly'), $this->getAggregatedData("first second of this hour", 0, "Avg"));
+		SetValue($this->GetIDForIdent('CountHourly'), $this->getAggregatedData("last hour", 0, "Avg"));
 		SetValue($this->GetIDForIdent('CountDaily'), $this->getAggregatedData("today 00:00", 1, "Avg"));
 		SetValue($this->GetIDForIdent('CountWeekly'), $this->getAggregatedData("Monday this week 00:00", 2, "Avg"));
 		SetValue($this->GetIDForIdent('CountMonthly'), $this->getAggregatedData("first day of this month 00:00", 3, "Avg"));
-		SetValue($this->GetIDForIdent('CountYearly'), $this->getAggregatedData("first day of this year 00:00", 4, "Avg"));
+		SetValue($this->GetIDForIdent('CountYearly'), $this->getAggregatedData("first day of January", 4, "Avg"));
 	}
 
 	protected function getAggregatedData($prompt, $aggregationLevel, $function) {
