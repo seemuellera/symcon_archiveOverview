@@ -131,7 +131,7 @@ class ArchiveOverview extends IPSModule {
 
 		// Hourly
 		$tsStart = strtotime("this hour");
-		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 0, $tsStart, $tsEnd, 0);
 		SetValue($this->GetIDForIdent('CountHourly'), $data[0]['Avg']);
 
 		// Daily
@@ -141,17 +141,17 @@ class ArchiveOverview extends IPSModule {
 
 		// Weekly
 		$tsStart = strtotime("Monday this week 00:00");
-		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 2, $tsStart, $tsEnd, 0);
 		SetValue($this->GetIDForIdent('CountWeekly'), $data[0]['Avg']);
 
 		// Monthly
 		$tsStart = strtotime("first day of this month 00:00");
-		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 3, $tsStart, $tsEnd, 0);
 		SetValue($this->GetIDForIdent('CountMonthly'), $data[0]['Avg']);
 
 		// Yearly
 		$tsStart = strtotime("first day of this year 00:00");
-		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 4, $tsStart, $tsEnd, 0);
 		SetValue($this->GetIDForIdent('CountYearly'), $data[0]['Avg']);
 	}
 
