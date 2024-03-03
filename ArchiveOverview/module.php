@@ -56,6 +56,7 @@ class ArchiveOverview extends IPSModule {
 			if (AC_GetAggregationType($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable')) == 1) {
 
 				// Create variables for counter aggregation types
+				$this->RegisterVariableFloat("CountHourly","Count This Hour","");
 				$this->RegisterVariableFloat("CountDaily","Count Today","");
 				$this->RegisterVariableFloat("CountWeekly","Count This Week","");
 				$this->RegisterVariableFloat("CountMonthly","Count This Month","");
@@ -118,6 +119,40 @@ class ArchiveOverview extends IPSModule {
 		
 		$this->LogMessage("Refresh in Progress", KL_DEBUG);
 		
+		if (AC_GetAggregationType($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable')) == 1) {
+
+			$this->RefreshInformationCounter();
+		}
+	}
+
+	protected function RefreshInformationCounter() {
+
+		$tsEnd = time();
+
+		// Hourly
+		$tsStart = strtotime("this hour");
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		SetValue($this->GetIdByIdent('CountHourly'), $data[0]['Avg']);
+
+		// Daily
+		$tsStart = strtotime("today 00:00");
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		SetValue($this->GetIdByIdent('CountDaily'), $data[0]['Avg']);
+
+		// Weekly
+		$tsStart = strtotime("Monday this week 00:00");
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		SetValue($this->GetIdByIdent('CountWeekly'), $data[0]['Avg']);
+
+		// Monthly
+		$tsStart = strtotime("first day of this month 00:00");
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		SetValue($this->GetIdByIdent('CountMonthly'), $data[0]['Avg']);
+
+		// Yearly
+		$tsStart = strtotime("first day of this year 00:00");
+		$data = AC_GetAggregatedValues($this->ReadPropertyInteger('ArchiveId'), $this->ReadPropertyInteger('SourceVariable'), 1, $tsStart, $tsEnd, 0);
+		SetValue($this->GetIdByIdent('CountYearly'), $data[0]['Avg']);
 	}
 
 	public function RequestAction($Ident, $Value) {
